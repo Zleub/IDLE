@@ -19,8 +19,8 @@
 	ft_putstr(bright_new.name);
 	write (1, " created with strengh = ", 24);
 	ft_putnbr(bright_new.strengh);
-	write (1, " & with defense = ", 18);
+	write (1, " & defense = ", 13);
 	ft_putnbr(bright_new.defense);
 	write (1, "\n", 1);
-//	open_write_save(bright_new); */
+	open_write_save(bright_new);
 }

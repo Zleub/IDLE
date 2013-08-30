@@ -11,6 +11,13 @@ void	new_game(void)
 		return ;
 }
 
+void	load_game(void)
+{
+	t_heros heros;
+
+	heros = open_read_save(heros);
+}
+
 void	menu(void)
 {
 	int 	enter;
@@ -23,8 +30,8 @@ void	menu(void)
 	enter = fgetc(fdopen(0, "r"));
 	if (enter == 'N' || enter == 'n')
 		new_game();
-//	if (enter == 'L' || enter == 'l')
-//		load_game();
+	if (enter == 'L' || enter == 'l')
+		load_game();
 //	if (enter == 'R' || enter == 'r')
 //		write_file("");
 	if (enter == 'E' || enter == 'e')
