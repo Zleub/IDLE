@@ -1,3 +1,5 @@
 TO DO :
 
-auto write_save() / read_save() from struct t_heros;
+- auto write_save() / read_save() from struct t_heros;
+- save protection;
+- rules.txt;
