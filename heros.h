@@ -17,10 +17,11 @@ typedef	struct	s_heros
 }				t_heros;
 
 /* file.c */
-void	write_save(t_heros heros, int filedesc);
-void	open_write_save(t_heros heros);
+void	write_save(t_heros *heros, int filedesc);
+void	open_write_save(t_heros *heros);
 int		write_file(char *file);
-t_heros	open_read_save(t_heros heros);
+t_heros	*open_read_save(t_heros *heros);
+t_heros	*read_save(t_heros *heros, char *raw_save);
 
 /* heros.c */
 void	create_heros(void);

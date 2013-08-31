@@ -13,9 +13,13 @@ void	new_game(void)
 
 void	load_game(void)
 {
-	t_heros heros;
+	t_heros *heros;
 
+	heros = malloc(sizeof(t_heros));
 	heros = open_read_save(heros);
+	ft_putstr(heros->name);
+	ft_putnbr(heros->strengh);
+	ft_putnbr(heros->defense);
 }
 
 void	menu(void)
