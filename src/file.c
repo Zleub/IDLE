@@ -1,5 +1,50 @@
 #include "heros.h"
 
+char	*read_monsters(char *buffer)
+{
+	char	data[100][100];
+	int 	cmp[3];
+	int array_D20[1];
+	char *monster_name;
+
+	D20(&array_D20[0], 1);
+	cmp[0] = 0;
+	cmp[1] = 0;
+	while (buffer[cmp[0]] != '\0')
+	{
+		cmp[2] = 0;
+		while (buffer[cmp[0]] != 10)
+		{
+			data[cmp[1]][cmp[2]] = buffer[cmp[0]];
+			cmp[0] = cmp[0] + 1;
+			cmp[2] = cmp[2] + 1;
+		}
+		data[cmp[1]][cmp[2]] = '\0';
+		cmp[0] = cmp[0] + 1;
+		cmp[1] = cmp[1] + 1;
+	}
+	monster_name = data[0];
+	return (monster_name);
+}
+
+char	*open_read_monsters(void)
+{
+	int 	filedesc;
+	char	buffer[1000];
+	int 	nbr;
+	char	*monster_name;
+
+	filedesc = open("./src/monsters.txt", O_RDONLY);
+	nbr = read(filedesc, buffer, 1000);
+	if (nbr < 1)
+	{
+		write(2, "Load() failed\n", 14);
+		return ("failed");
+	}
+	monster_name = read_monsters(buffer);
+	return (monster_name);
+}
+
 void	write_save(t_heros *heros, int filedesc)
 {
 	char	tmp[20];
@@ -13,6 +58,18 @@ void	write_save(t_heros *heros, int filedesc)
 	write (filedesc, "\n", 1);
 	itoa(heros->defense, tmp);
 //	write (filedesc, "heros.defense : ", 16);
+	write (filedesc, tmp, ft_strlen(tmp));
+	write (filedesc, "\n", 1);
+	itoa(heros->level, tmp);
+//	write (filedesc, "heros.level : ", 16);
+	write (filedesc, tmp, ft_strlen(tmp));
+	write (filedesc, "\n", 1);
+	itoa(heros->xp, tmp);
+//	write (filedesc, "heros.xp : ", 16);
+	write (filedesc, tmp, ft_strlen(tmp));
+	write (filedesc, "\n", 1);
+	itoa(heros->life, tmp);
+//	write (filedesc, "heros.life : ", 16);
 	write (filedesc, tmp, ft_strlen(tmp));
 	write (filedesc, "\n", 1);
 }
@@ -32,7 +89,7 @@ void	open_write_save(t_heros *heros)
 
 t_heros	*read_save(t_heros *heros, char *raw_save)
 {
-	int 	cmp[5];
+	int 	cmp[3];
 	char	data[100][100];
 
 	cmp[0] = 0;
@@ -53,6 +110,9 @@ t_heros	*read_save(t_heros *heros, char *raw_save)
 	heros->name = data[0];
 	heros->strengh = atoi(data[1]);
 	heros->defense = atoi(data[2]);
+	heros->level = atoi(data[3]);
+	heros->xp = atoi(data[4]);
+	heros->life = atoi(data[5]);
 	return (heros);
 }
 
@@ -66,13 +126,16 @@ t_heros	*open_read_save(t_heros *heros)
 	if (filedesc == -1)
 	{
 		write(2, "Open() failed\n", 14);
+		return (heros);
 	}
 	nb = read(filedesc, buffer, 1000);
 	if (nb < 1)
 	{
 		write(2, "Load() failed\n", 14);
+		return (heros);
 	}
 	read_save(heros, buffer);
+	close (filedesc);
 	return (heros);
 
 }

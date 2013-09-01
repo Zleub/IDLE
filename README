@@ -1,5 +1,7 @@
 TO DO :
 
+- rules.txt;
 - auto write_save() / read_save() from struct t_heros;
 - save protection;
-- rules.txt;
+- D20() optimization;
+- round menu + options;

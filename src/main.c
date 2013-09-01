@@ -11,15 +11,41 @@ void	new_game(void)
 		return ;
 }
 
+void	play_round(t_heros *heros)
+{
+	t_monster *monster;
+	int 	enter;
+
+	write (1, "auto-battling\n", 15);
+	monster = malloc(sizeof(t_monster));
+	monster = create_monster(monster);
+	ft_putstr(heros->name);
+	write (1, " [", 2);
+	ft_putnbr(heros->level);
+	write (1, "][", 2);
+	ft_putnbr(heros->xp);
+	write (1, "] encounters a ", 15);
+	ft_putstr(monster->name);
+	write (1, "\n", 1);
+	free (monster);
+	write(1, "Press Enter", 11);
+	enter = fgetc(fdopen(0, "r"));
+	if (enter == 10)
+		play_round(heros);
+}
+
+
 void	load_game(void)
 {
 	t_heros *heros;
 
 	heros = malloc(sizeof(t_heros));
 	heros = open_read_save(heros);
-	ft_putstr(heros->name);
-	ft_putnbr(heros->strengh);
-	ft_putnbr(heros->defense);
+	if (heros->name)
+	{
+		write (1, "Load done !\n", 13);
+		play_round(heros);
+	}
 }
 
 void	menu(void)
