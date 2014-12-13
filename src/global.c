@@ -100,7 +100,7 @@ void	D20(int *base, int size)
 	while (i < size)
 	{
 		base[i] = nbr % 21;
-		nbr = nbr / 21;
+		nbr = nbr / 20;
 		i = i + 1;
 	}
 }

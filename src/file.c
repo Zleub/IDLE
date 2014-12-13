@@ -23,7 +23,7 @@ char	*read_monsters(char *buffer)
 		cmp[0] = cmp[0] + 1;
 		cmp[1] = cmp[1] + 1;
 	}
-	monster_name = data[0];
+	monster_name = data[array_D20[0]];
 	return (monster_name);
 }
 

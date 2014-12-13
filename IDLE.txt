@@ -1,0 +1,27 @@
+diff --git a/src/file.c b/src/file.c
+index c7096c1..aedec29 100644
+--- a/src/file.c
++++ b/src/file.c
+@@ -23,7 +23,7 @@ char	*read_monsters(char *buffer)
+ 		cmp[0] = cmp[0] + 1;
+ 		cmp[1] = cmp[1] + 1;
+ 	}
+-	monster_name = data[0];
++	monster_name = data[array_D20[0]];
+ 	return (monster_name);
+ }
+ 
+diff --git a/src/global.c b/src/global.c
+index 59c636c..fd31ab4 100644
+--- a/src/global.c
++++ b/src/global.c
+@@ -100,7 +100,7 @@ void	D20(int *base, int size)
+ 	while (i < size)
+ 	{
+ 		base[i] = nbr % 21;
+-		nbr = nbr / 21;
++		nbr = nbr / 20;
+ 		i = i + 1;
+ 	}
+ }
+\ No newline at end of file
